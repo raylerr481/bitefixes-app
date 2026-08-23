@@ -1,35 +1,39 @@
 # BiteFixes App
 
-Mobile application for accessing **BiteFixes and Bitey from phones**. This repository is a client/channel, not a second AI brain.
+**BiteFixes App** is the mobile extension of **BiteFixes.com**. It gives customers and authorized users a native mobile channel for the same BiteFixes enterprise AI experience available through the website and other supported channels.
+
+It is a client/channel, **not a second AI brain**.
 
 ## Architecture
 
 ```text
 Mobile user
     ↓
-bitefixes-app (Expo / mobile UI)
+BiteFixes App
     ↓
-Bitey Backend / Bitey IA
+BiteFixes Backend
     ↓
-Company AI Profile + authorized context
-    ↓
-knowledge / memory / intelligent web research / workflows
-    ↓
-external AI collaboration when needed
+BiteFixes enterprise brain
+    ├─ Company AI Profile
+    ├─ authorized context + memory
+    ├─ company knowledge
+    ├─ web research
+    ├─ intent / services / workflows
+    └─ external AI collaboration
     ↓
 response
 ```
 
-The backend is the authoritative source for Bitey's intelligence, company context, conversation state, memory, research, services, workflows and tenant authorization.
+The app is responsible for mobile presentation, authentication/session transport, conversation UI, permitted attachments and channel-specific UX. It must not contain provider secrets, cross-tenant knowledge or a parallel reasoning engine.
 
-The app is responsible for mobile presentation, authentication/session transport, conversation UI, permitted attachments and channel-specific UX. It must not contain provider secrets, cross-tenant knowledge, or a parallel reasoning engine.
+## Relationship to Bitey
 
-## Relationship to the platform
+- `bitey-web` — **Bitey IA**, the independent general web-based supracerebro.
+- `bitey-ai` — **Bitey Plugin Web**, the WordPress channel.
+- `bitefixes-backend` — **BiteFixes Backend**, the specialized enterprise brain for BiteFixes.com and its authorized channels.
+- `bitefixes-app` — **BiteFixes App**, this mobile extension of BiteFixes.com.
 
-- `bitefixes-backend` — Bitey IA and intelligence core.
-- `bitey-ai` — WordPress channel.
-- `bitey-web` — public web facade for a ChatGPT-like Bitey experience.
-- `bitefixes-app` — this mobile channel.
+BiteFixes App continues to use the BiteFixes backend contracts so that company context, customer context, permissions and business workflows remain consistent across channels.
 
 ## Development
 
@@ -39,5 +43,3 @@ This project uses Expo.
 npm install
 npx expo start
 ```
-
-The app should be tested against the same backend contracts used by the other authorized channels so that Bitey behaves consistently across web, WordPress and mobile.
