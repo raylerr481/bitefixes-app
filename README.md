@@ -1,56 +1,43 @@
-# Welcome to your Expo app 👋
+# BiteFixes App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Mobile application for accessing **BiteFixes and Bitey from phones**. This repository is a client/channel, not a second AI brain.
 
-## Get started
+## Architecture
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+Mobile user
+    ↓
+bitefixes-app (Expo / mobile UI)
+    ↓
+Bitey Backend / Bitey IA
+    ↓
+Company AI Profile + authorized context
+    ↓
+knowledge / memory / intelligent web research / workflows
+    ↓
+external AI collaboration when needed
+    ↓
+response
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The backend is the authoritative source for Bitey's intelligence, company context, conversation state, memory, research, services, workflows and tenant authorization.
 
-### Other setup steps
+The app is responsible for mobile presentation, authentication/session transport, conversation UI, permitted attachments and channel-specific UX. It must not contain provider secrets, cross-tenant knowledge, or a parallel reasoning engine.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Relationship to the platform
 
-## Learn more
+- `bitefixes-backend` — Bitey IA and intelligence core.
+- `bitey-ai` — WordPress channel.
+- `bitey-web` — public web facade for a ChatGPT-like Bitey experience.
+- `bitefixes-app` — this mobile channel.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Development
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+This project uses Expo.
 
-## Join the community
+```bash
+npm install
+npx expo start
+```
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+The app should be tested against the same backend contracts used by the other authorized channels so that Bitey behaves consistently across web, WordPress and mobile.
