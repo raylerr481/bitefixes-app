@@ -1,0 +1,2 @@
+const BASE='https://bitefixes-backend.onrender.com';
+export async function biteyChat(message:string,service?:string){const payload={message,source:'bitefixes-app',language:'pt-BR',service:service||'business_ai'};const paths=['/api/v1/chat','/api/v1/messages'];for(const path of paths){try{const r=await fetch(BASE+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){const d=await r.json();return d.response||d.message||d.reply||'Recebi sua mensagem.'}}catch{}}throw new Error('Bitey Backend indisponível');}
