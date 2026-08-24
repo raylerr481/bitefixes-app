@@ -1,10 +1,14 @@
 # BiteFixes App
 
-`bitefixes-app` is the **mobile application/channel for BiteFixes.com**.
+`bitefixes-app` is the **mobile application and customer channel for BiteFixes.com**.
 
-It gives customers and authorized users a native mobile experience for the same BiteFixes enterprise AI and business services available through the website and other supported channels.
+Its purpose is to provide a native mobile experience for BiteFixes services, conversations, support and authorized business workflows while relying on the BiteFixes Backend as the authoritative server-side intelligence and data layer.
 
 > **Boundary:** BiteFixes App is a client/channel, not a second AI brain.
+
+## Product purpose
+
+The app connects customers and authorized users with BiteFixes through mobile UX while keeping business intelligence, company knowledge, customer memory, permissions and provider credentials on the backend.
 
 ## Architecture
 
@@ -15,7 +19,7 @@ BiteFixes App
     ↓
 BiteFixes Backend
     ↓
-BiteFixes enterprise brain
+BiteFixes enterprise intelligence
     ├─ Company AI Profile
     ├─ authorized context + memory
     ├─ company knowledge
@@ -34,28 +38,32 @@ The app is responsible for:
 - Authentication/session transport.
 - Conversation interface.
 - Permitted attachments.
-- Notifications and mobile-specific capabilities when implemented.
+- Notifications and mobile-specific capabilities.
 - Channel-specific configuration.
 - Reliable communication with the authorized BiteFixes backend.
+- Customer-facing access to approved BiteFixes services and workflows.
 
 The app must NOT contain:
 
 - provider API keys;
-- a parallel reasoning engine;
+- a parallel authoritative reasoning engine;
 - authoritative company memory;
 - cross-tenant knowledge;
 - private company data embedded in the client bundle.
 
-## Relationship to Bitey
+## Relationship to Bitey AI
+
+BiteFixes App and Bitey AI App are **different products**:
 
 | Repository | Product | Role |
 |---|---|---|
-| `bitey-web` | **Bitey IA** | Independent general web AI experience + intelligence foundation |
+| `bitey-web` | **Bitey AI Web** | General Bitey AI web application |
+| `bitey-ai-app` | **Bitey AI App** | General Bitey AI Android application |
 | `bitey-ai` | **Bitey AI Enterprise WordPress Plugin** | WordPress enterprise channel |
-| `bitefixes-backend` | **BiteFixes Backend** | Specialized enterprise brain for BiteFixes.com |
-| `bitefixes-app` | **BiteFixes App** | This mobile channel |
+| `bitefixes-backend` | **BiteFixes Backend** | Specialized enterprise intelligence/backend |
+| `bitefixes-app` | **BiteFixes App** | This BiteFixes mobile channel |
 
-The app uses BiteFixes backend contracts so that company context, customer context, permissions and business workflows remain consistent across authorized channels.
+BiteFixes App uses BiteFixes Backend contracts so that company context, customer context, permissions and business workflows remain consistent across authorized BiteFixes channels.
 
 ## Security rules
 
@@ -82,8 +90,6 @@ Before release, validate:
 App → authentication → BiteFixes Backend → authorized context → response
 ```
 
-and verify that existing website/backend contracts remain unaffected.
-
 ## Product principle
 
-BiteFixes App is a **channel of BiteFixes.com**, not another intelligence core. All authoritative business intelligence remains in `bitefixes-backend`.
+BiteFixes App is a **mobile channel of BiteFixes.com**. The authoritative business intelligence remains in `bitefixes-backend`.
