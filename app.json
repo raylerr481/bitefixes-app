@@ -7,10 +7,8 @@
     "icon": "./assets/images/icon.png",
     "scheme": "bitefixesapp",
     "userInterfaceStyle": "automatic",
-    "ios": {
-      "icon": "./assets/expo.icon"
-    },
     "android": {
+      "package": "com.raylerr481.bitefixes",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -18,6 +16,9 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false
+    },
+    "ios": {
+      "icon": "./assets/expo.icon"
     },
     "web": {
       "output": "static",
