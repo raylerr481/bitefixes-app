@@ -1,91 +1,61 @@
 # BiteFixes App
 
-`bitefixes-app` is the Android/mobile application and customer channel for BiteFixes.com.
+`bitefixes-app` is the Android/mobile application and customer/business channel for BiteFixes.com.
 
-## Current status
+## Product role
 
-- Android app: active development and release-build validation.
-- BiteFixes Web: already exists separately.
-- This repository is the mobile client, not the backend and not Bitey IA.
-- Production Android builds use Expo/EAS and GitHub Actions.
-
-## Objective
-
-Provide customers and authorized BiteFixes users with a reliable mobile channel for services, support, conversations, tickets and approved business workflows while keeping company intelligence and sensitive data on the BiteFixes backend.
-
-**BiteFixes App is not Bitey IA App and is not a second AI brain.**
-
-## Architecture
+BiteFixes is a separate enterprise product connected to the Bitey IA ecosystem. Its mobile app communicates with the BiteFixes Backend through authorized APIs.
 
 ```text
 Mobile user
     ↓
 BiteFixes App
     ↓
-Authentication / authorization
-    ↓
 BiteFixes Backend
     ↓
-Company intelligence, services, tickets and workflows
+Bitey IA Empresarial
     ↓
-Response / authorized action
+CRM + customers + tickets + services + knowledge + workflows
 ```
 
-## Core functionalities
+## Bitey IA Empresarial
 
-- Mobile customer UX.
+Bitey IA Empresarial maintains Bitey IA's architecture, capabilities and general intelligence while operating with authorized BiteFixes business context. It is the contextual enterprise AI used within BiteFixes channels.
+
+It is not a second general Bitey IA brain and does not restrict the Bitey IA Supracerebro.
+
+## Core functionality
+
 - Authentication and secure sessions.
-- Customer conversations and support.
-- Service discovery and approved workflows.
+- Customer profile and account access.
+- Conversations and support.
+- Service discovery.
 - Ticket creation/status/history where enabled.
-- Authorized attachments and mobile capabilities.
+- Authorized attachments.
 - Notifications and mobile integrations where implemented.
-- Communication with the BiteFixes Backend API.
-- Production Android builds through Expo/EAS and CI.
+- Authorized business workflows.
+- Access to Bitey IA Empresarial within BiteFixes context.
 
 ## Security boundary
 
-The app must not contain provider API keys, private credentials, authoritative company memory, cross-tenant customer data, duplicate business reasoning, or sensitive backend rules. Authorization is enforced server-side.
+The app must not contain provider API keys, private credentials, authoritative company memory, cross-tenant data or privileged backend rules. Authorization is enforced server-side.
 
 ## Relationship to Bitey IA
 
-Bitey IA and BiteFixes are separate products.
+- `bitey-web` — Bitey IA general Supracerebro/web channel.
+- `bitey-ia-app` — mobile channel of the same Bitey IA.
+- `bitey-ai` — WordPress enterprise integration/plugin.
+- BiteFixes — separate enterprise product using Bitey IA Empresarial.
+- JobIA and Bitey SBT are other specialized modules in the wider ecosystem.
 
-| Repository | Product | Role |
-|---|---|---|
-| `bitey-web` | Bitey IA Web | General Bitey IA web application and Cloudflare supracerebro |
-| `bitey-ia-app` | Bitey IA App | General Bitey IA Android client |
-| `bitey-ai` | Bitey IA Enterprise WordPress Plugin | Authorized enterprise WordPress channel |
-| `bitefixes-web` | BiteFixes Web | Existing BiteFixes.com website/frontend |
-| `bitefixes-backend` | BiteFixes Backend | Specialized enterprise intelligence/API |
-| `bitefixes-app` | BiteFixes App | This mobile channel |
-| `JobIA` | JobIA | Separate employment/opportunity mobile product |
+## Android target
 
-Bitey IA capabilities may be consumed by BiteFixes through explicit authorized contracts, without merging the products or replacing the BiteFixes backend.
+The immediate target is a real installable APK validated on a physical Android device.
 
-## Bitey Trainer boundary
-
-Bitey Trainer is not a public navigation feature of this app. Any BiteFixes integration with internal Bitey capabilities must use authorized APIs and provider-compliant contracts.
+```text
+Install → authenticate → business action/chat → backend → response → persistence
+```
 
 ## Development
 
-This project uses Expo/React Native.
-
-```bash
-npm install
-npx expo start
-```
-
-Before release validate:
-
-```text
-App → authentication → backend authorization → service/chat workflow → response → persistence → logout/login
-```
-
-## Android release target
-
-The immediate release target is a **real Android APK that can be installed and tested on a physical Android device**, using the BiteFixes application icon and production configuration. BiteFixes Web is separate and is not required for the APK build.
-
-## Product principle
-
-**BiteFixes App is a mobile channel of BiteFixes.com. Bitey IA App is a separate Android client for the general Bitey IA product, whose supracerebro is Bitey Web.**
+Expo/React Native is used for the mobile application. Backend intelligence, secrets, CRM data and authorization remain server-side.
