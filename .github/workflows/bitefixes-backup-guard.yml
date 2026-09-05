@@ -65,6 +65,13 @@ jobs:
           git fetch --no-tags origin "${BEFORE_SHA}" "${AFTER_SHA}"
           changed="$(git diff --name-only "${BEFORE_SHA}" "${AFTER_SHA}")"
           if ! printf '%s\n' "$changed" | grep -Eq '(^app/|^src/|^components/|^package|^app\.json$|^eas\.json$|^\.github/workflows/)'; then exit 0; fi
+          # GitHub's App token cannot push a ref containing changed workflow files
+          # without the elevated workflow permission. Keep the guard green and
+          # leave the normal application backup path active for non-workflow changes.
+          if printf '%s\n' "$changed" | grep -Eq '^\.github/workflows/'; then
+            echo 'Backup skipped for this push because workflow files changed and the available GitHub App token cannot create a ref containing workflow changes.'
+            exit 0
+          fi
           name="backup/pre-change-${AFTER_SHA:0:12}"
           git checkout --detach "${BEFORE_SHA}"
           git push --force origin "HEAD:refs/heads/${name}"
@@ -86,5 +93,9 @@ jobs:
           base="${latest#origin/}"
           changed="$(git diff --name-only "origin/${base}" origin/main || true)"
           if printf '%s\n' "$changed" | grep -Eq '(^app/|^src/|^components/|^package|^app\.json$|^eas\.json$|^\.github/workflows/)'; then
+            if printf '%s\n' "$changed" | grep -Eq '^\.github/workflows/'; then
+              echo 'Audit marker skipped because the available token cannot create a ref containing workflow changes.'
+              exit 0
+            fi
             git push --force origin "origin/main:refs/heads/backup/audit-${GITHUB_SHA:0:12}"
           fi
